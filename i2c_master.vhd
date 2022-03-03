@@ -48,7 +48,9 @@ ENTITY i2c_master IS
     data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
     ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
     sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
-    scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
+    scl       : INOUT  STD_LOGIC;
+    the_handshake : out std_logic
+    );                   --serial clock output of i2c bus
 END i2c_master;
 
 ARCHITECTURE logic OF i2c_master IS
@@ -115,7 +117,9 @@ BEGIN
       ack_error <= '0';                    --clear acknowledge error flag
       bit_cnt <= 7;                        --restarts data bit counter
       data_rd <= "00000000";               --clear data read port
+      the_handshake <= '0';
     ELSIF(clk'EVENT AND clk = '1') THEN
+      the_handshake <= '0';
       IF(data_clk = '1' AND data_clk_prev = '0') THEN  --data clock rising edge
         CASE state IS
           WHEN ready =>                      --idle state
@@ -125,6 +129,7 @@ BEGIN
               data_tx <= data_wr;            --collect requested data to write
               state <= start;                --go to start bit
             ELSE                             --remain idle
+            the_handshake <= '1';
               busy <= '0';                   --unflag busy
               state <= ready;                --remain idle
             END IF;
@@ -243,5 +248,6 @@ BEGIN
   --set scl and sda outputs
   scl <= '0' WHEN (scl_ena = '1' AND scl_clk = '0') ELSE 'Z';
   sda <= '0' WHEN sda_ena_n = '0' ELSE 'Z';
+  
   
 END logic;

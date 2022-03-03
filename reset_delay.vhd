@@ -1,28 +1,36 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.numeric_std.ALL;
 
-entity reset_delay is
-    port(
-        signal iClk     : in std_logic;
-        signal reset_o  : out std_logic
-    );
-end reset_delay;
+-- NOTE: THIS VERSION OF THE RESET DELAY IS ACTIVE HIGH --
 
-architecture Arch of reset_delay is
 
-    signal cont : unsigned(19 downto 0) := X"00000";
+ENTITY reset_delay IS	
+    GENERIC (DELAY_LENGTH : unsigned(19 DOWNTO 0) := X"FFFFF");
+    PORT (
+        SIGNAL iCLK : IN std_logic;	
+        SIGNAL oRESET : OUT std_logic := '1'
+			);	
+END Reset_Delay;
 
-    begin
-    
-    process
-    begin
-        wait until rising_edge (iClk);
-        if cont /= x"FFFFF" then
-            cont <= cont + 1;
-            reset_o <= '1';
-        else
-            reset_o <= '0';
-        end if;
-    end process;
-end Arch;
+
+ARCHITECTURE Arch OF reset_delay IS
+	
+    SIGNAL Cont : unsigned(19 DOWNTO 0):=X"00000";
+
+BEGIN
+
+ PROCESS
+ BEGIN
+
+	  WAIT UNTIL rising_edge (iCLK);
+	  IF Cont /= DELAY_LENGTH THEN
+--	  IF Cont /= X"0000F" THEN
+		  Cont <= Cont + 1;	
+		  oRESET <= '1';	
+	  ELSE
+		  oRESET <= '0';	
+	  END IF;
+ END PROCESS;
+	
+END Arch;
