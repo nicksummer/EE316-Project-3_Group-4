@@ -17,29 +17,26 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param chipscope.maxJobs 4
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7z007sclg400-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.cache/wt} [current_project]
-set_property parent.project_path {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.xpr} [current_project]
+set_property webtalk.parent_dir C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.cache/wt [current_project]
+set_property parent.project_path C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part digilentinc.com:cora-z7-07s:part0:1.0 [current_project]
-set_property ip_output_repo {c:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.cache/ip} [current_project]
+set_property ip_output_repo c:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
-  {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.srcs/sources_1/new/ClockGen.vhd}
-  {C:/Users/nicks/Documents/Project 3/PWM_Generator.vhd}
-  {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.srcs/sources_1/new/debounce.vhd}
-  {C:/Users/nicks/Documents/Project 3/i2c_master.vhd}
-  {C:/Users/nicks/Documents/Project 3/i2c_user_level.vhd}
-  {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.srcs/sources_1/imports/Desktop/lcd_master.vhd}
-  {C:/Users/nicks/Documents/Project 3/EE3136Project3/EE3136Project3.srcs/sources_1/new/top_level.vhd}
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.srcs/sources_1/new/ClockGen.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/PWM_Generator.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.srcs/sources_1/new/debounce.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/i2c_master.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/i2c_user_level.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.srcs/sources_1/imports/Desktop/lcd_master.vhd
+  C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/EE3136Project3/EE3136Project3.srcs/sources_1/new/top_level.vhd
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -49,8 +46,11 @@ read_vhdl -library xil_defaultlib {
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{C:/Users/nicks/Documents/Project 3/Cora-Z7-07S-master.xdc}}
-set_property used_in_implementation false [get_files {{C:/Users/nicks/Documents/Project 3/Cora-Z7-07S-master.xdc}}]
+read_xdc C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/Cora-Z7-07S-master.xdc
+set_property used_in_implementation false [get_files C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/Cora-Z7-07S-master.xdc]
+
+read_xdc C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/Cora-Z7-10-Master.xdc
+set_property used_in_implementation false [get_files C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/Cora-Z7-10-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

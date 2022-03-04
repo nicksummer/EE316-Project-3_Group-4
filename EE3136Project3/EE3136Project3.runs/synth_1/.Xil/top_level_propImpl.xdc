@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:{C:/Users/nicks/Documents/Project 3/Cora-Z7-07S-master.xdc} rfile:../../../../Cora-Z7-07S-master.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Users/wesba/Documents/GitHub/EE316-Project-3_Group-4/Cora-Z7-07S-master.xdc rfile:../../../../Cora-Z7-07S-master.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:7 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict {PACKAGE_PIN H16 IOSTANDARD LVCMOS33} [get_ports clk]
 set_property src_info {type:XDC file:1 line:11 export:INPUT save:INPUT read:READ} [current_design]
